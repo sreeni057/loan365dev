@@ -1,0 +1,75 @@
+<?php namespace {{vendor}}\{{name}};
+
+use Illuminate\Support\ServiceProvider;
+{{@placeholder provider.use.console|console @end}}
+
+/**
+ * The {{name}}ServiceProvider class
+ *
+ * @package {{vendor}}\{{name}}
+ * @author  {{author}} <{{email}}>
+ */
+class {{name}}ServiceProvider extends ServiceProvider
+{
+
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
+
+    /**
+     * Bootstrap the application events.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        {{@callback
+            if ($this->plain) {
+                return '// Code';
+            } else {
+                return '// Bootstrap handles';
+            }
+        @end}}
+        {{@placeholder provider.boot.route|route @end}}
+        {{@placeholder provider.boot.config|config @end}}
+        {{@placeholder provider.boot.lang|lang @end}}
+        {{@placeholder provider.boot.view|view @end}}
+        {{@placeholder provider.boot.asset|asset @end}}
+        {{@placeholder provider.boot.migration|migration @end}}
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->singleton('{{lower_name}}', function ($app) {
+            return new {{name}};
+        });
+        {{@placeholder provider.register.console|console @end}}
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [
+            '{{lower_name}}',
+            {{@placeholder provider.provides.console|console @end}}
+        ];
+    }
+    {{@placeholder provider.method.routehandle|route @end}}
+    {{@placeholder provider.method.confighandle|config @end}}
+    {{@placeholder provider.method.langhandle|lang @end}}
+    {{@placeholder provider.method.viewhandle|view @end}}
+    {{@placeholder provider.method.assethandle|asset @end}}
+    {{@placeholder provider.method.migrationhandle|migration @end}}
+}
