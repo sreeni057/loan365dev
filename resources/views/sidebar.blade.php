@@ -29,10 +29,10 @@
                            </select> -->
                            <a href="#" class="creative-menu-toggle"><i class="material-icons">home</i></i></a>
                                 <ul id="menu-main-menu" class="menu">
-                                    <li class="current_page_item">
+                                    <li class="">
                                         <a href="{{url('/')}}"><span>HOME</span></a>
                                     </li>
-                                    <li>
+                                    <li class="current_page_item">
                                         <a href="content/investment/plans.html"><span>ABOUT US</span></a>
                                     </li>
                                     <li>
@@ -42,7 +42,7 @@
                                         <a href="content/investment/company.html"><span>BLOG</span></a>
                                     </li>
                                     <li>
-                                        <a href="content/investment/contact.html"><span>CONTACT US</span></a>
+                                        <a href="{{url('contact')}}"><span>CONTACT US</span></a>
                                     </li>
                                     <li>
                                         <a href="{{url('login')}}"><span><span style="padding: 0px; color:#EFE4C1;">SIGN IN</span></span></a>

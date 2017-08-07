@@ -60,10 +60,10 @@ class ForgotPasswordController extends Controller
     $user->forgot_token = md5($user->email.rand().time());
     $user->save();
     /*$mail_status = emailmodel::email_sending($user->email,$user);*/
-        Mail::to($user->email)->send(new Userforgotpassword($user));    
-        dd("success");
     try
     {
+        Mail::to($user->email)->send(new Userforgotpassword($user));    
+        dd("success");
     }
     catch (\Exception $e)
     {

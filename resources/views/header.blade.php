@@ -11,14 +11,14 @@
 
     <!-- Basic Page Needs -->
     <meta charset="utf-8">
-    <title>Loan</title>
+    <title>Loan - 365</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
 
 
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-    <!-- <link rel="icon" type="image/png" href="assets/img/favicon.png"> -->
+    <link rel="apple-touch-icon" sizes="76x76" href="{{URL::asset('content\investment\images/FaviconOrangeWhiteBG-26.png')}}">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
     <!-- <title>Material Kit by Creative Tim</title> -->

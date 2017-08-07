@@ -39,14 +39,11 @@ class guest extends Controller
  				$remortgage_type	  	 = Input::get('remortgage_type');
  				$onboarding_upd	  	     = Input::get('onboarding_upd');
  				/*insert*/
- 			    if(Input::has('onboarding_upd'))
- 				{
+ 			    if(Input::has('onboarding_upd')){
  					/*purchases*/
- 					if($mortgage_type == 1)
-	 				{
+ 					if($mortgage_type == 1){
 	 					$values_check  = purchases::check_table($id);
-	 					if($values_check == 1)
-	 					{
+	 					if($values_check == 1){
 	 						$inputArr 				 = array(
 					 										'mortgage_type'      => $mortgage_type,
 					 										'buyer_type'         => $buyer_type,
@@ -56,8 +53,7 @@ class guest extends Controller
 			 				$fetch_val       		 = purchases::updatevalues($id,$inputArr);
 
 	 					}
-	 					elseif($values_check == 0)
-	 					{
+	 					elseif($values_check == 0){
 	 						$inputArr 				 = array(
 					 										'mortgage_type'      => $mortgage_type,
 					 										'buyer_type'         => $buyer_type,
@@ -77,16 +73,14 @@ class guest extends Controller
 
 		 					session(['mortgage_type' => $mortgage_type]); 
 	 					}
-	 					else
-	 					{
+	 					else{
 	 						return redirect('error');
 	 					}
 	 					$key 					     = 4;
 			 			return redirect('onboarding/'.$key);
 	 				}
 	 				/*remortages*/
-	 				else if($mortgage_type == 2)
-	 				{
+	 				else if($mortgage_type == 2){
 	 					$values_check                = remortages::check_table($id);
 	 					if($values_check == 1)
 	 					{
@@ -98,8 +92,7 @@ class guest extends Controller
 			 				$fetch_val      	     = remortages::updatevalues($id,$inputArr);
 			 				$key                     = 3;
 	 					}
-	 					elseif($values_check == 0)
-	 					{
+	 					elseif($values_check == 0){
 	 						$inputArr 				 = array(
 					 										'mortgage_type'      => $mortgage_type,
 					 										'remortgage_type'    => $remortgage_type,
@@ -120,20 +113,16 @@ class guest extends Controller
 
 		 					$key    			     = 3;
 	 					}
-	 					else
-	 					{
+	 					else{
 	 						return redirect('error');
 	 					}
 		 				return redirect('onboarding/'.$key);
 	 				}
  				}
- 				else
- 				{
- 					if(isset($id))
-	 				{	
+ 				else{
+ 					if(isset($id)){	
 	 					/*purchases*/
-	 					if($type == 1)
-	 					{
+	 					if($type == 1){
 	 						$fetch_val         = purchases::fetchvalues($id);
 		 					$fetchvalues       = array(
 				 											'id'            	=> $id,  
@@ -142,8 +131,7 @@ class guest extends Controller
 			 										   );
 	 					}
 	 					/*remortages*/
-	 					elseif($type == 2)
-	 					{
+	 					elseif($type == 2){
 
 	 						$fetch_val         = remortages::fetchvalues($id);
 		 					$fetchvalues       = array(
@@ -153,8 +141,7 @@ class guest extends Controller
 			 										   );
 	 					}
 	 				}
-	 				else
-	 				{
+	 				else{
 			 				$fetchvalues       = array(
 				 											'id'           		=>'',
 				 											'mortgage_type'	    =>$value,
@@ -169,12 +156,10 @@ class guest extends Controller
  			case '3':
  				$last_id        						= session::get('last_id');
  			    $type                   				= session::get('mortgage_type');
- 			    if(empty($last_id))
- 			    {
+ 			    if(empty($last_id)){
  			    	return redirect('oops');
  			    }
- 				if(Input::has('onboarding_upt'))
- 				{
+ 				if(Input::has('onboarding_upt')){
  					//dd($_POST);
  					$total_years_mortages   			= Input::get('total_years_mortages');
  					$value_of_home 						= Input::get('value_of_home');
@@ -196,14 +181,12 @@ class guest extends Controller
  				}
  				$fetchvalues							= remortages::fetchvalues($last_id);
  				$date_value  							= explode("/",$fetchvalues->end_date_mortgage_introductory);
- 				if($date_value['0'] == "")
- 				{
+ 				if($date_value['0'] == ""){
  					$fetchvalues->day 					= old('day'); 							
 	 				$fetchvalues->month 				= old('month'); 							
 	 				$fetchvalues->year 					= old('year');
  				}
- 				else
- 				{
+ 				else{
  					$fetchvalues->day 					= $date_value['0']; 							
  					$fetchvalues->month 				= $date_value['1']; 							
  					$fetchvalues->year 					= $date_value['2']; 							
@@ -215,8 +198,7 @@ class guest extends Controller
  				$last_id        						= session::get('last_id');
  			    $type                   				= session::get('mortgage_type');
  			    $user_id                                = session::get('user_id');
- 			    if(Input::has('onboarding_upd'))
- 			    {
+ 			    if(Input::has('onboarding_upd')){
  			    	$applying_type                      = Input::get('applying_type');
  			    	$inputArr							= array(
  			    													'applying_type'		=> $applying_type
@@ -226,28 +208,23 @@ class guest extends Controller
  			    													'user_id'           => $user_id
  			    												);
  			    	}
- 			    	if($type == '1')
- 			    	{
+ 			    	if($type == '1'){
  			    		$fetch_val       		        = purchases::updatevalues($last_id,$inputArr);
  			    	}
- 			    	elseif($type == '2')
- 			    	{
+ 			    	elseif($type == '2'){
  			    		$fetchvalues 					= remortages::updatevalues($last_id,$inputArr);
  			    	}
  			    	$key = 5;
  			    	return redirect('onboarding/'.$key);
 
  			    }
- 			    if($type == '1')
- 			    {
+ 			    if($type == '1'){
  			    	$fetchvalues						= purchases::fetchvalues($last_id);
  			    }
- 			    elseif ($type == '2') 
- 			    {
+ 			    elseif ($type == '2'){
  			    	$fetchvalues						= remortages::fetchvalues($last_id);	
  			    }
- 			    else
- 			    {
+ 			    else{
  			    	return redirect('error');
  			    }
  			    $fetchvalues							= array(	
@@ -264,34 +241,28 @@ class guest extends Controller
  			    $type                   				= session::get('mortgage_type');
  			    $earn_each_year							= Input::get('earn_each_year');
  			    $stamp_duty 							= Input::get('stamp_duty'); 			    
- 			    if(Input::has('onboarding_upd'))
- 			    {	
+ 			    if(Input::has('onboarding_upd')){	
  			    	$applying_type                      = Input::get('applying_type');
  			    	$inputArr							= array(
  			    													'earn_each_year'		=> $earn_each_year,
  			    													'stamp_duty'			=> $stamp_duty
  			    											   );
- 			    	if($type == '1')
- 			    	{
+ 			    	if($type == '1'){
  			    		$fetch_val       		        = purchases::updatevalues($last_id,$inputArr);
  			    	}
- 			    	elseif($type == '2')
- 			    	{
+ 			    	elseif($type == '2'){
  			    		$fetchvalues 					= remortages::updatevalues($last_id,$inputArr);
  			    	}
  			    	$key = 6;
  			    	return redirect('onboarding/'.$key);
  			    }
- 			    if ($type == '1')
- 			    {
+ 			    if ($type == '1'){
  			    	$fetchvalues						= purchases::fetchvalues($last_id);
  			    }
- 			    elseif ($type == '2') 
- 			    {
+ 			    elseif ($type == '2'){
  			    	$fetchvalues						= remortages::fetchvalues($last_id);	
  			    }
- 			    else
- 			    {
+ 			    else{
  			    	return redirect('error');
  			    }
  				$fetchvalues							= array(	
@@ -310,15 +281,13 @@ class guest extends Controller
  			    $monthly_repay_loan                     = Input::get('monthly_repay_loan');
  			    $country_court_judegment                = Input::get('country_court_judegment');
  			    $iva                                    = Input::get('iva');
- 			    if(!empty(session::get('user_id')))
- 			    		{
+ 			    if(!empty(session::get('user_id'))){
  			    			$inputArr = array(
  			    								'user_id' => session::get('user_id')
  			    							 );
  			    			purchases::updatevalues(session::get('last_id'),$inputArr);
  			    		}
- 			    if(Input::has('onboarding_upd'))
- 			    {	
+ 			    if(Input::has('onboarding_upd')){	
  			    	$applying_type                      = Input::get('applying_type');
 
  			    	$inputArr							= array(
@@ -327,34 +296,27 @@ class guest extends Controller
  			    													'country_court_judegment'	    => $country_court_judegment,
  			    													'iva'	    					=> $iva
  			    											   );
- 			    	if($type == '1')
- 			    	{
+ 			    	if($type == '1'){
  			    		$fetch_val       		        = purchases::updatevalues($last_id,$inputArr);
  			    	}
- 			    	elseif($type == '2')
- 			    	{
+ 			    	elseif($type == '2'){
  			    		$fetchvalues 					= remortages::updatevalues($last_id,$inputArr);
  			    	}
- 			    	if($iva == 2 && $country_court_judegment == 2)
- 			    	{
+ 			    	if($iva == 2 && $country_court_judegment == 2){
  			    		$key = 7;
  			    	}
- 			    	else
- 			    	{
+ 			    	else{
  			    		$key = 9;
  			    	}
  			    	return redirect('onboarding/'.$key);
  			    }
- 			    if ($type == '1')
- 			    {
+ 			    if ($type == '1'){
  			    	$fetchvalues						= purchases::fetchvalues($last_id);
  			    }
- 			    elseif ($type == '2') 
- 			    {
+ 			    elseif ($type == '2'){
  			    	$fetchvalues						= remortages::fetchvalues($last_id);	
  			    }
- 			    else
- 			    {
+ 			    else{
  			    	return redirect('error');
  			    }
  				$fetchvalues							= array(	
@@ -374,35 +336,29 @@ class guest extends Controller
  			    $appeals_type                           = Input::get('appeals_type');
  			    $introductory_rate                      = Input::get('introductory_rate');
  			    $capital_type                           = Input::get('capital_type');
- 			    if(Input::has('onboarding_upd'))
- 			    {	
+ 			    if(Input::has('onboarding_upd')){	
  			    	$inputArr							= array(
  			    													'appeals_type'		  => $appeals_type,
  			    													'introductory_rate'	  => $introductory_rate,
  			    													'capital_type'	      => $capital_type
  			    											   );
- 			    	if($type == '1')
- 			    	{
+ 			    	if($type == '1'){
  			    		$fetch_val       		        = purchases::updatevalues($last_id,$inputArr);
  			    	}
- 			    	elseif($type == '2')
- 			    	{
+ 			    	elseif($type == '2'){
  			    		$fetchvalues 					= remortages::updatevalues($last_id,$inputArr);
  			    	}
  			    	$key = 8;
 
  			    	return redirect('onboarding/'.$key);
  			    }
- 			    if ($type == '1')
- 			    {
+ 			    if ($type == '1'){
  			    	$fetchvalues						= purchases::fetchvalues($last_id);
  			    }
- 			    elseif ($type == '2') 
- 			    {
+ 			    elseif ($type == '2'){
  			    	$fetchvalues						= remortages::fetchvalues($last_id);	
  			    }
- 			    else
- 			    {
+ 			    else{
  			    	return redirect('error');
  			    }
  			    $fetchvalues							= array(	
@@ -425,36 +381,30 @@ class guest extends Controller
  			    $month                                  = Input::get('month');
  			    $year                                   = Input::get('year');
  			    $date                                   = Input::get('date');
- 			    if(Input::has('onboarding_upd'))
- 			    {	
+ 			    if(Input::has('onboarding_upd')){	
  			    	$inputArr							= array(
  			    													'user_name'		  => $user_name,
  			    													'user_email'	  => $user_email,
  			    													'user_dob'	      => $date
  			    											   );
- 			    	if($type == '1')
- 			    	{
+ 			    	if($type == '1'){
  			    		$fetch_val       		        = purchases::updatevalues($last_id,$inputArr);
  			    	}
- 			    	elseif($type == '2')
- 			    	{
+ 			    	elseif($type == '2'){
  			    		$fetchvalues 					= remortages::updatevalues($last_id,$inputArr);
  			    	}
  			    	$key = 9;
 
  			    	return redirect('onboarding/'.$key);
  			    }
- 			    if ($type == '1')
- 			    {
+ 			    if ($type == '1'){
  			    	$fetchvalues						= purchases::fetchvalues($last_id);
  			    	
  			    }
- 			    elseif ($type == '2') 
- 			    {
+ 			    elseif ($type == '2'){
  			    	$fetchvalues						= remortages::fetchvalues($last_id);	 			    	
  			    }
- 			    else
- 			    {
+ 			    else{
  			    	return redirect('error');
  			    }
  			    /*$date_value  						= explode("/",$fetchvalues->user_dob);
@@ -483,8 +433,7 @@ class guest extends Controller
  				return view('loan365::onboarding.onboarding8',compact('key','fetchvalues'));
  				break;
  			case '9':
- 					if(session::get('user_id'))
- 					{
+ 					if(session::get('user_id')){
  						return redirect('dashboard');	
  					}
  					return redirect('register');
@@ -493,5 +442,9 @@ class guest extends Controller
  				return redirect('error');
  				break;
  		}
+    }
+    public function contact()
+    {
+    	return view('loan365::contact');
     }
 }
