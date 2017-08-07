@@ -1,6 +1,6 @@
 @include('header')
 <body class="style-simple layout-full-width mobile-tb-left button-stroke no-content-padding header-creative header-open header-rtl minimalist-header sticky-white ab-show subheader-both-center menu-line-below-80-1 menuo-right footer-copy-center">
-    @include('sidebar')
+    @include('loan365::sidebar')
     <div class="section section-full-screen section-signup" style="background-image: url('assets/img/city.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
             <div class="container">
                 <div class="row">

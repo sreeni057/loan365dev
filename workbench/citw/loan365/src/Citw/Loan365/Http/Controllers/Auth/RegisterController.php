@@ -43,13 +43,14 @@ class RegisterController extends Controller
 
     public function __construct(Request $request)
     {
-        
-        $this->request = $request;
+        $this->request                      = $request;
+        $this->siderbarActive               = 'login';
     }
 
     public function getRegisterForm()
     {
-        return view('loan365::auth.register');
+        $fetchvalues['siderbarActive']       = $this->siderbarActive;
+        return view('loan365::auth.register',compact('fetchvalues'));
     }
 
     public function saveRegisterForm()

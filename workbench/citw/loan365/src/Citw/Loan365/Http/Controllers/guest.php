@@ -15,6 +15,11 @@ use Session;
 
 class guest extends Controller
 {
+	public $siderbarActive;
+	public function __construct()
+    {    
+        $this->siderbarActive   = "home";                          
+    }
 	/*The function used for new user and existing user Welcomemessage & Onboarding*/
     public function purchase($key,$value = 0)
     {
@@ -150,6 +155,7 @@ class guest extends Controller
 				 									  );
 	 				}
  				}
+ 				$fetchvalues['siderbarActive']          = $this->siderbarActive;
  				return view('loan365::onboarding.onboarding2',compact('key','fetchvalues'));
  				break;
  			/*Let’s do a quick health check on your current mortgage.*/
@@ -191,6 +197,7 @@ class guest extends Controller
  					$fetchvalues->month 				= $date_value['1']; 							
  					$fetchvalues->year 					= $date_value['2']; 							
  				}
+ 				$fetchvalues['siderbarActive']          = $this->siderbarActive;
  				return view('loan365::onboarding.onboarding3',compact('key','fetchvalues'));
  				break;
  			/*Applying Type*/
@@ -232,7 +239,8 @@ class guest extends Controller
  			    													'mortgage_type'       => $type,
  			    													'applying_type' 	  => $fetchvalues->applying_type 
 
- 			    											   );					
+ 			    											   );	
+				$fetchvalues['siderbarActive']          = $this->siderbarActive;
  				return view('loan365::onboarding.onboarding4',compact('key','fetchvalues'));
  				break;
  			/*A big part of how much you can borrow is dependent on your income and your available savings*/
@@ -270,7 +278,8 @@ class guest extends Controller
  			    													'mortgage_type'       => $type,
  			    													'earn_each_year'	  => $fetchvalues->earn_each_year,
  			    													'stamp_duty'		  => $fetchvalues->stamp_duty
- 			    											   );		 				 
+ 			    											   );	
+				$fetchvalues['siderbarActive']          = $this->siderbarActive;	 				 
  				return view('loan365::onboarding.onboarding5',compact('key','fetchvalues'));
  				break;
  			/*Lenders also consider your other loans and credit arrangements when deciding how much you can borrow.*/
@@ -327,6 +336,7 @@ class guest extends Controller
  			    													'country_court_judegment'	  => $fetchvalues->country_court_judegment,
  			    													'iva'		 				  => $fetchvalues->iva
  			    											   );
+ 				$fetchvalues['siderbarActive']          = $this->siderbarActive;
  				return view('loan365::onboarding.onboarding6',compact('key','fetchvalues'));
  				break;
  			/*There are two primary products to choose between: fixed rate and variable rate.*/
@@ -368,7 +378,7 @@ class guest extends Controller
  			    													'introductory_rate'	  		  => $fetchvalues->introductory_rate,
  			    													'capital_type'	     		  => $fetchvalues->capital_type
  			    											   );
-
+ 			    $fetchvalues['siderbarActive']         = $this->siderbarActive;
  				return view('loan365::onboarding.onboarding7',compact('key','fetchvalues'));
  				break;
  			/*Lastly, we need some personal details..*/
@@ -430,6 +440,7 @@ class guest extends Controller
  			    													'year'                        => /*$fetchvalues->year*/"",
  			    													'date'                        => $fetchvalues->user_dob
  			    											   );
+ 				$fetchvalues['siderbarActive']          = $this->siderbarActive;
  				return view('loan365::onboarding.onboarding8',compact('key','fetchvalues'));
  				break;
  			case '9':
@@ -445,6 +456,7 @@ class guest extends Controller
     }
     public function contact()
     {
-    	return view('loan365::contact');
+    	$fetchvalues['siderbarActive']                 = 'contact';
+    	return view('loan365::contact',compact('fetchvalues'));
     }
 }

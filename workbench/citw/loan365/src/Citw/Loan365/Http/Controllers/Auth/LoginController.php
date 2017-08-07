@@ -4,6 +4,7 @@ namespace Citw\Loan365\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Models\Users;
 use Session;
@@ -38,7 +39,11 @@ class LoginController extends Controller
      */
     protected $request;     
     
-
+    public function __construct(Request $request)
+      {
+          $this->request        = $request;
+          $this->siderbarActive = 'login';
+      }
     public function getLoginForm()
     {
         /*$page_value = $value;*/
@@ -46,7 +51,8 @@ class LoginController extends Controller
         {
             return redirect('dashboard');    
         }
-        return view('loan365::auth.login');
+        $fetchvalues['siderbarActive'] = $this->siderbarActive;
+        return view('loan365::auth.login',compact('fetchvalues'));
     }
 
     public function authenticate()

@@ -33,11 +33,12 @@ class ForgotPasswordController extends Controller
 
   public function __construct(Request $request)
   {
-      $this->request = $request;
+      $this->request        = $request;
+      $this->siderbarActive = 'login';
   }
   public function index()
   {
-
+     $fetchvalues['siderbarActive'] = $this->siderbarActive;
      return view('loan365::auth.forgot');
 
   }
@@ -105,6 +106,7 @@ class ForgotPasswordController extends Controller
         $user->save();
         return redirect('dashboard');
     }
+    $fetchvalues['siderbarActive'] = $this->siderbarActive;
     return view('loan365::auth.reset',compact('token'));
   }
   public function postReset($token)
@@ -131,6 +133,7 @@ class ForgotPasswordController extends Controller
     $user->password = \Hash::make($inputs['password']);
     $user->forgot_token=NULL;
     $user->save();
+    $fetchvalues['siderbarActive'] = $this->siderbarActive;
     return view('authentication::user.resetSuccess');
   }
 }
